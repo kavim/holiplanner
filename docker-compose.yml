@@ -1,67 +1,92 @@
-version: "3.7"
+###############################################################################
+# Configuration based on:
+# https://www.digitalocean.com/community/tutorials/how-to-containerize-a-laravel-application-for-development-with-docker-compose-on-ubuntu-18-04-pt
+###############################################################################
 
+version: '3.7'
 services:
-    # image project
-    app:
-        build:
-            context: .
-            dockerfile: Dockerfile
+    db:
+        image: mysql:8.0.33
+        container_name: holiplanner-db
         restart: unless-stopped
-        working_dir: /var/www/
+        command: --sql-mode='' --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        ports:
+            - 3306:3306
         volumes:
-            - ./:/var/www
-        depends_on:
-            - redis
+            - ./.docker/mysql/data:/var/lib/mysql
         networks:
-            - laravel
+            - holiplanner
 
-    # nginx
+    redis:
+        image: redis:alpine
+        container_name: holiplanner-redis
+        restart: unless-stopped
+        networks:
+            - holiplanner
+
+    smtp:
+        image: maildev/maildev
+        container_name: holiplanner-smtp
+        restart: unless-stopped
+        ports:
+            - 8200:80
+        networks:
+            - holiplanner
+
+    pma:
+        image: phpmyadmin/phpmyadmin
+        container_name: holiplanner-pma
+        ports:
+            - 8100:80/tcp
+        environment:
+            MYSQL_DATABASE: ${DB_USERNAME}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+        depends_on:
+            - db
+        networks:
+            - holiplanner
+
     nginx:
         image: nginx:alpine
+        container_name: holiplanner-nginx
         restart: unless-stopped
         ports:
-            - "8989:80"
+            - 8000:80
         volumes:
             - ./:/var/www
-            - ./docker/nginx/:/etc/nginx/conf.d/
+            - ./.docker/nginx:/etc/nginx/conf.d/
         networks:
-            - laravel
+            - holiplanner
 
-    # db mysql
-    db:
-        image: mysql:5.7.22
+    app:
+        build:
+            args:
+                USER_ID: ${USER_ID}
+                GROUP_ID: ${GROUP_ID}
+            context: ./
+            dockerfile: Dockerfile
+        image: holiplanner
+        container_name: holiplanner-app
         restart: unless-stopped
-        environment:
-            MYSQL_DATABASE: ${DB_DATABASE:-laravel}
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
-            MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
-            MYSQL_USER: ${DB_USERNAME:-username}
+        working_dir: /var/www/
+        depends_on:
+            - db
+            - redis
+            - smtp
+        ports:
+            - 3000:3000
         volumes:
-            - ./.docker/mysql/dbdata:/var/lib/mysql
-        ports:
-            - "3388:3306"
+            - ./:/var/www
         networks:
-            - laravel
-
-    # PHPMyAdmin
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        restart: unless-stopped
-        ports:
-            - "8080:80"
-        environment:
-            PMA_HOST: db
-            PMA_PORT: 3306
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-userpass}
-        networks:
-            - laravel
-
-    # redis
-    redis:
-        image: redis:latest
-        networks:
-            - laravel
+            - holiplanner
 
 networks:
-    laravel:
+    holiplanner:
         driver: bridge

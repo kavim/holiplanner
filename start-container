@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Install dependencies
+composer install --no-interaction
+
+echo "---- SETANDO PERMISSOES ------"
+mkdir -p /var/www/vendor
+chown -R $USER:$USER /var/www
+#chown -R www-data:www-data /var/www
+#find * -type d -exec chmod 755 {} \;
+#find * -type f -exec chmod 644 {} \;
+chmod -R 777 /var/www/storage
+chmod -R 777 /var/www/bootstrap/cache
+
+echo "-------- PHP ARTISAN ---------"
+php artisan key:generate
+php artisan storage:link
+php artisan migrate
+php artisan optimize
+echo "------ FIM PHP ARTISAN -------"
+
+php-fpm
+
+# Execute the main process
+exec "$@"
