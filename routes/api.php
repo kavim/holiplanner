@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\PlanController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function (Request $request) {
-    echo "buenas! 🧉";
-});
+Route::apiResource('plans', PlanController::class);
