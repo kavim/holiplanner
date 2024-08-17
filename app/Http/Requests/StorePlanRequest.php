@@ -26,6 +26,8 @@ class StorePlanRequest extends FormRequest
             'description' => ['required', 'string'],
             'date' => ['required', 'date'],
             'location' => ['required', 'string'],
+            'participants' => ['nullable', 'array'],
+            'participants.*' => ['required', 'exists:users,id'],
         ];
     }
 }

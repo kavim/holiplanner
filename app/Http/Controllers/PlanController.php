@@ -19,6 +19,8 @@ class PlanController extends Controller
     {
         $plan = Plan::create($request->validated());
 
+        $plan->participants()->sync($request->input('participants', []));
+
         return new PlanResource($plan);
     }
 
@@ -30,6 +32,10 @@ class PlanController extends Controller
     public function update(UpdatePlanRequest $request, Plan $plan)
     {
         $plan->update($request->validated());
+
+        if($request->has('participants')) {
+            $plan->participants()->sync($request->input('participants', []));
+        }
 
         return new PlanResource($plan);
     }

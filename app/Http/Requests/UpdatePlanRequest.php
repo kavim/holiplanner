@@ -26,6 +26,8 @@ class UpdatePlanRequest extends FormRequest
             'description' => ['string'],
             'date' => ['date'],
             'location' => ['string'],
+            'participants' => ['nullable', 'array'],
+            'participants.*' => ['required', 'exists:users,id'],
         ];
     }
 }

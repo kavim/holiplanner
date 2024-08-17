@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Plan extends Model
 {
@@ -19,4 +20,19 @@ class Plan extends Model
     protected $casts = [
         'date' => 'datetime',
     ];
+
+
+    /**
+    * Relationships
+    */
+
+    public function participants(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
 }
