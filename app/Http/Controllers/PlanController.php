@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Plan;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Http\Resources\PlanResource;
 use App\Http\Requests\StorePlanRequest;
 use App\Http\Requests\UpdatePlanRequest;
-use App\Models\Plan;
-use Illuminate\Http\Request;
-use App\Http\Resources\PlanResource;
 
 class PlanController extends Controller
 {
@@ -45,5 +45,12 @@ class PlanController extends Controller
         $plan->delete();
 
         return response()->noContent();
+    }
+
+    public function generatePdf(Plan $plan)
+    {
+        $pdf = Pdf::loadView('pdf.holiday_plan', ['plan' => $plan]);
+
+        return $pdf->download("holiday_plan_{$plan->id}-{now()}.pdf");
     }
 }
