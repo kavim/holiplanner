@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Plan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,5 +23,18 @@ class PlanFactory extends Factory
             'date' => $this->faker->dateTime,
             'location' => $this->faker->address,
         ];
+    }
+
+    /**
+     * Define participants for the plan.
+     *
+     * @param array<int> $ids
+     * @return $this
+     */
+    public function withParticipants(array $ids)
+    {
+        return $this->afterCreating(function (Plan $plan) use ($ids) {
+            $plan->participants()->sync($ids);
+        });
     }
 }
