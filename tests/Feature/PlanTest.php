@@ -22,6 +22,8 @@ class PlanTest extends TestCase
 
         $this->users = User::factory()->count(4)->create();
         $this->plans = Plan::factory()->withParticipants($this->users->pluck('id')->toArray())->count(10)->create();
+
+        $this->actingAs($this->users->first());
     }
 
     public function test_plan_show(): void
@@ -137,5 +139,21 @@ class PlanTest extends TestCase
             'plan_id' => $this->plans->first()->id,
             'user_id' => $this->users->last()->id,
         ]);
+    }
+
+    public function test_plan_delete(): void
+    {
+        $this->deleteJson(route('plans.destroy', $this->plans->first()->id))
+            ->assertStatus(204);
+
+        $this->assertDatabaseMissing('plans', [
+            'id' => $this->plans->first()->id,
+        ]);
+    }
+
+    public function test_generate_pdf(): void
+    {
+        $this->getJson(route('plans.pdf', $this->plans->first()->id))
+            ->assertStatus(200)->assertHeader('Content-Type', 'application/pdf');
     }
 }

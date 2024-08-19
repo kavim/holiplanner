@@ -54,12 +54,12 @@ docker-compose up -d --build
 
 ### Install Dependencies
 
-If you are running the project locally, omit the docker-compose exec prefix.
+If you are running the project locally, omit the docker exec holiplanner-app prefix.
 
 Once the containers are up, dependencies will be installed automatically. If not, you can install them manually:
 
 ```bash
-docker-compose exec app composer install
+docker exec holiplanner-app composer install
 ```
 
 ### Run Migrations
@@ -97,5 +97,5 @@ http://localhost/api
 To run the tests, use the following command:
 
 ```json
-docker-compose exec app php artisan test
+docker exec holiplanner-app php artisan test
 ```

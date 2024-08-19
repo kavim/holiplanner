@@ -30,9 +30,4 @@ class Plan extends Model
     {
         return $this->belongsToMany(User::class);
     }
-
-    public function owner()
-    {
-        return $this->belongsTo(User::class, 'owner_id');
-    }
 }
