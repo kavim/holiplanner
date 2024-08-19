@@ -9,11 +9,6 @@ This project is a simple solution to a technical test. The goal was to create a 
 1. [Introduction](#about-this-project)
 2. [Getting Started](#getting-started)
 3. [Endpoints](#endpoints)
-    - [GET /api/users](#get-apiusers)
-    - [POST /api/users](#post-apiusers)
-    - [GET /api/users/{id}](#get-apiusersid)
-    - [PUT /api/users/{id}](#put-apiusersid)
-    - [DELETE /api/users/{id}](#delete-apiusersid)
 4. [Running Tests](#running-tests)
 
 ## Getting Started
@@ -95,98 +90,6 @@ Here you have a shorcut to test this api, just download the postman collection [
 
 ```bash
 http://localhost/api
-```
-
-### Endpoints
-
-#### GET /api/users
-
-Retrieve a list of users.
-
-**Response:**
-
-```json
-[
-    {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john@example.com"
-    },
-    ...
-]
-```
-
-#### POST /api/users
-
-Create a new user.
-
-Request:
-
-```json
-{
-    "name": "John Doe",
-    "email": "john@example.com",
-    "password": "secret"
-}
-```
-
-Response:
-
-```json
-{
-    "id": 1,
-    "name": "John Doe",
-    "email": "john@example.com"
-}
-```
-
-#### GET /api/users/{id}
-
-Retrieve a specific user by ID.
-
-Response:
-
-```json
-{
-    "id": 1,
-    "name": "John Doe",
-    "email": "john@example.com"
-}
-```
-
-#### PUT /api/users/{id}
-
-Update a specific user by ID.
-
-Request:
-
-```json
-{
-    "name": "John Doe",
-    "email": "john@example.com",
-    "password": "newsecret"
-}
-```
-
-```json
-Response:
-{
-    "id": 1,
-    "name": "John Doe",
-    "email": "john@example.com"
-}
-```
-
-#### DELETE /api/users/{id}
-
-Delete a specific user by ID.
-
-Response:
-
-```json
-{
-    "message": "User deleted successfully"
-}
 ```
 
 ## Running Tests

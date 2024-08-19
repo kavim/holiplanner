@@ -5,7 +5,7 @@
         <h2 class="text-2xl font-semibold mb-4">Base URL</h2>
         <div class="bg-gray-800 p-4 rounded shadow mb-6">
             <x-torchlight-code language='text'>
-                http://your-api-base-url.com/api
+                {{env('APP_URL')}}/api
             </x-torchlight-code>
         </div>
 
