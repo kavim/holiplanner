@@ -26,6 +26,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -108,13 +118,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{holiplanner-url}}/api/plans-pdf",
+							"raw": "{{holiplanner-url}}/api/plans-pdf/{{id}}",
 							"host": [
 								"{{holiplanner-url}}"
 							],
 							"path": [
 								"api",
-								"plans-pdf"
+								"plans-pdf",
+								"{{id}}"
 							]
 						}
 					},
@@ -127,7 +138,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Updated Event Title\",\r\n    \"description\": \"This is an updated description of the event.\",\r\n    \"date\": \"2023-10-15\",\r\n    \"location\": \"Updated Location\"\r\n}",
+							"raw": "{\r\n    \"title\": \"update title 3\",\r\n    \"description\": \"This is an updated description of the event.\",\r\n    \"date\": \"2023-10-15\",\r\n    \"location\": \"Updated Location\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -166,7 +177,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"destination\": \"Porto Alegre, RS\",\r\n    \"startsAt\": \"2024-07-11T22:38:16\",\r\n    \"endsAt\": \"2024-07-11T22:38:16\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -215,6 +226,142 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseData=pm.response.json();",
+									"console.log(responseData);",
+									"pm.globals.set(\"access_token\", responseData.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{holiplanner-url}}/api/login",
+							"host": [
+								"{{holiplanner-url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseData=pm.response.json();",
+									"console.log(responseData);",
+									"pm.globals.set(\"access_token\", responseData.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"outro teste\",\n    \"email\": \"outroemail@example.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{holiplanner-url}}/api/register",
+							"host": [
+								"{{holiplanner-url}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}
