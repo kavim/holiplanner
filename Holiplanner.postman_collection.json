@@ -1,0 +1,222 @@
+{
+	"info": {
+		"_postman_id": "25445565-b8ef-446e-a965-aeaa6d6729d9",
+		"name": "Holiplanner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36927907"
+	},
+	"item": [
+		{
+			"name": "Plan",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseData=pm.response.json();\r",
+									"console.log(responseData);\r",
+									"pm.globals.set(\"id\", responseData.data.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Sample Event Title\",\r\n    \"description\": \"This is a description of the sample event.\",\r\n    \"date\": \"2023-10-01\",\r\n    \"location\": \"Sample Location\",\r\n    \"participants\" : [1]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{holiplanner-url}}/api/plans",
+							"host": [
+								"{{holiplanner-url}}"
+							],
+							"path": [
+								"api",
+								"plans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{holiplanner-url}}/api/plans/{{id}}",
+							"host": [
+								"{{holiplanner-url}}"
+							],
+							"path": [
+								"api",
+								"plans",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pfd",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{holiplanner-url}}/api/plans-pdf",
+							"host": [
+								"{{holiplanner-url}}"
+							],
+							"path": [
+								"api",
+								"plans-pdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Updated Event Title\",\r\n    \"description\": \"This is an updated description of the event.\",\r\n    \"date\": \"2023-10-15\",\r\n    \"location\": \"Updated Location\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{holiplanner-url}}/api/plans/{{id}}",
+							"host": [
+								"{{holiplanner-url}}"
+							],
+							"path": [
+								"api",
+								"plans",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"destination\": \"Porto Alegre, RS\",\r\n    \"startsAt\": \"2024-07-11T22:38:16\",\r\n    \"endsAt\": \"2024-07-11T22:38:16\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{holiplanner-url}}/api/plans/{{id}}",
+							"host": [
+								"{{holiplanner-url}}"
+							],
+							"path": [
+								"api",
+								"plans",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{holiplanner-url}}/api/plans",
+							"host": [
+								"{{holiplanner-url}}"
+							],
+							"path": [
+								"api",
+								"plans"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

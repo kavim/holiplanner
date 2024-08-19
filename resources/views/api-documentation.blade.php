@@ -3,7 +3,7 @@
 @section('content')
     <article>
         <h2 class="text-2xl font-semibold mb-4">Base URL</h2>
-        <div class="bg-stone-800 p-4 rounded shadow mb-6">
+        <div class="bg-gray-800 p-4 rounded shadow mb-6">
             <x-torchlight-code language='text'>
                 http://your-api-base-url.com/api
             </x-torchlight-code>
@@ -13,10 +13,10 @@
 
         <div class="mb-6">
             <h3 class="text-xl font-semibold mb-2">1. List All Plans</h3>
-            <p><strong>Endpoint:</strong> <code class="bg-gray-200 p-1 rounded">GET /plans</code></p>
+            <p><strong>Endpoint:</strong> <code class="bg-gray-500 p-1 rounded">GET /plans</code></p>
             <p><strong>Description:</strong> Retrieve a list of all plans.</p>
             <p><strong>Response:</strong></p>
-            <div class="bg-stone-800 p-4 rounded shadow">
+            <div class="bg-gray-800 p-4 rounded shadow">
                 <x-torchlight-code language='json'>
                     [
                         {
@@ -42,10 +42,10 @@
 
         <div class="mb-6">
             <h3 class="text-xl font-semibold mb-2">2. Create a New Plan</h3>
-            <p><strong>Endpoint:</strong> <code class="bg-gray-200 p-1 rounded">POST /plans</code></p>
+            <p><strong>Endpoint:</strong> <code class="bg-gray-500 p-1 rounded">POST /plans</code></p>
             <p><strong>Description:</strong> Create a new plan.</p>
             <p><strong>Request Body:</strong></p>
-            <div class="bg-stone-700 p-4 rounded shadow">
+            <div class="bg-gray-800 p-4 rounded shadow">
                 <x-torchlight-code language='json'>
                     {
                         "title": "New Plan Title",
@@ -57,7 +57,7 @@
                 </x-torchlight-code>
             </div>
             <p><strong>Response:</strong></p>
-            <div class="bg-stone-700 p-4 rounded shadow">
+            <div class="bg-gray-800 p-4 rounded shadow">
                 <x-torchlight-code language='json'>
                     {
                         "id": 3,
@@ -73,10 +73,10 @@
 
         <div class="mb-6">
             <h3 class="text-xl font-semibold mb-2">3. Get a Specific Plan</h3>
-            <p><strong>Endpoint:</strong> <code class="bg-gray-200 p-1 rounded">GET /plans/{id}</code></p>
+            <p><strong>Endpoint:</strong> <code class="bg-gray-500 p-1 rounded">GET /plans/{id}</code></p>
             <p><strong>Description:</strong> Retrieve details of a specific plan by ID.</p>
             <p><strong>Response:</strong></p>
-            <div class="bg-stone-700 p-4 rounded shadow">
+            <div class="bg-gray-800 p-4 rounded shadow">
                 <x-torchlight-code language='json'>
                     {
                         "id": 1,
@@ -92,10 +92,10 @@
 
         <div class="mb-6">
             <h3 class="text-xl font-semibold mb-2">4. Update a Plan</h3>
-            <p><strong>Endpoint:</strong> <code class="bg-gray-200 p-1 rounded">PUT /plans/{id}</code></p>
+            <p><strong>Endpoint:</strong> <code class="bg-gray-500 p-1 rounded">PUT /plans/{id}</code></p>
             <p><strong>Description:</strong> Update an existing plan by ID.</p>
             <p><strong>Request Body:</strong></p>
-            <div class="bg-stone-700 p-4 rounded shadow">
+            <div class="bg-gray-800 p-4 rounded shadow">
                 <x-torchlight-code language='json'>
                     {
                         "title": "Updated Plan Title",
@@ -107,7 +107,7 @@
                 </x-torchlight-code>
             </div>
             <p><strong>Response:</strong></p>
-            <div class="bg-stone-700 p-4 rounded shadow">
+            <div class="bg-gray-800 p-4 rounded shadow">
                 <x-torchlight-code language='json'>
                     {
                         "id": 1,
@@ -123,10 +123,10 @@
 
         <div class="mb-6">
             <h3 class="text-xl font-semibold mb-2">5. Delete a Plan</h3>
-            <p><strong>Endpoint:</strong> <code class="bg-gray-200 p-1 rounded">DELETE /plans/{id}</code></p>
+            <p><strong>Endpoint:</strong> <code class="bg-gray-500 p-1 rounded">DELETE /plans/{id}</code></p>
             <p><strong>Description:</strong> Delete a specific plan by ID.</p>
             <p><strong>Response:</strong></p>
-            <div class="bg-stone-700 p-4 rounded shadow">
+            <div class="bg-gray-800 p-4 rounded shadow">
                 <x-torchlight-code language='json'>
                     {
                         "message": "Plan deleted successfully."
@@ -139,7 +139,7 @@
 
         <div class="mb-6">
             <h3 class="text-xl font-semibold mb-2">Plan</h3>
-            <div class="bg-stone-700 p-4 rounded shadow">
+            <div class="bg-gray-800 p-4 rounded shadow">
                 <x-torchlight-code language='json'>
                     {
                         "id": "integer",
@@ -157,7 +157,7 @@
 
         <div class="mb-6">
             <h3 class="text-xl font-semibold mb-2">StorePlanRequest</h3>
-            <div class="bg-stone-700 p-4 rounded shadow">
+            <div class="bg-gray-800 p-4 rounded shadow">
                 <x-torchlight-code language='json'>
                     {
                         "title": "required|string|max:255",
@@ -172,7 +172,7 @@
 
         <div class="mb-6">
             <h3 class="text-xl font-semibold mb-2">UpdatePlanRequest</h3>
-            <div class="bg-stone-700 p-4 rounded shadow">
+            <div class="bg-gray-800 p-4 rounded shadow">
                 <x-torchlight-code language='json'>
                     {
                         "title": "sometimes|required|string|max:255",
@@ -189,7 +189,7 @@
 
         <div class="mb-6">
             <h3 class="text-xl font-semibold mb-2">PlanResource</h3>
-            <div class="bg-stone-700 p-4 rounded shadow">
+            <div class="bg-gray-800 p-4 rounded shadow">
                 <x-torchlight-code language='json'>
                     {
                         "id": "integer",
@@ -205,7 +205,7 @@
 
         <div class="mb-6">
             <h3 class="text-xl font-semibold mb-2">PlanCollection</h3>
-            <div class="bg-stone-700 p-4 rounded shadow">
+            <div class="bg-gray-800 p-4 rounded shadow">
                 <x-torchlight-code language='json'>
                     [
                         {

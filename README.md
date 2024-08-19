@@ -29,10 +29,10 @@ Follow these steps to clone and start the project:
 
 #### Or locally
 
--   PHP-8.3^
+-   PHP 8.3^
 -   Composer
--   Mysql 8.0.33 (or equivalent mariaDB)
--   Redis, Mailservice and Nginx, you can install locally or work around with it running the server in other ways
+-   MySQL 8.0.33 (or MariaDB equivalent)
+-   Redis, Mailservice, and Nginx (can be installed locally or bypassed by running the server differently)
 
 ### Clone the Repository
 
@@ -59,9 +59,9 @@ docker-compose up -d --build
 
 ### Install Dependencies
 
-If you are running the project locally ignore the `docker-compose exec`prefix
+If you are running the project locally, omit the docker-compose exec prefix.
 
-Once the containers are up, you can run the migration manually, however, the `entrypoint` already do it for us.
+Once the containers are up, dependencies will be installed automatically. If not, you can install them manually:
 
 ```bash
 docker-compose exec app composer install
@@ -69,11 +69,13 @@ docker-compose exec app composer install
 
 ### Run Migrations
 
-Run the database migrations to set up the database schema, the `entrypoint` already do it for us. so you can run it manually or just run the seeders
+Run the database migrations to set up the database schema. The entrypoint script handles this by default, but you can run them manually if needed:
 
 ```bash
 docker-compose exec app php artisan migrate
 ```
+
+You can also seed the database:
 
 ```bash
 docker-compose exec app php artisan db:seed
@@ -81,11 +83,11 @@ docker-compose exec app php artisan db:seed
 
 ## Access the Application
 
-The application should now be running and accessible at http://localhost:8000 on this page we can find a docs replica, falow this to test the api or just use postman
+The application should now be running and accessible at http://localhost:8000. The home page includes API documentation, which you can use for testing the endpoints directly or through Postman.
 
 ## Postman collection
 
-Here you have a shorcut to test this api, just download the postman collection
+Here you have a shorcut to test this api, just download the postman collection [postman collection](https://github.com/kavim/holiplanner/blob/main/Holiplanner.postman_collection.json)
 
 ## API Documentation
 
